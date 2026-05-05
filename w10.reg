@@ -1,0 +1,167 @@
+Windows Registry Editor Version 5.00
+; Mod by CheyCopt
+
+; Disable Open on hover in Search menu
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds]
+"ShellFeedsTaskbarOpenOnHover"=dword:00000000
+"ShellFeedsTaskbarContentUpdateMode"=dword:00000001
+
+; Disable Open on hover in Search menu
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB]
+"OpenOnHover"=dword:00000000
+
+; Enable & config Storage Sense Windows 10
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+"AllowStorageSenseGlobal"=dword:00000001
+"ConfigStorageSenseGlobalCadence"=dword:00000007
+
+; Disable Alt-tab Edge
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"MultiTaskingAltTabFilter"=dword:00000003
+
+; Enable Clipboard
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Clipboard]
+"EnableClipboardHistory"=dword:00000001
+
+; Show icon Computer & User's Files on Desktop
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
+"{59031a47-3f72-44a7-89c5-5595fe6b30ee}"=dword:00000000
+"{20D04FE0-3AEA-1069-A2D8-08002B30309D}"=dword:00000000
+
+; Enable auto pick color
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"AutoColorization"=dword:00000001
+
+; Disable keyboard shortcut accessibility
+[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+"Flags"="506"
+
+; Disable keyboard shortcut accessibility
+[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+"Flags"="122"
+
+; Disable keyboard shortcut accessibility
+[HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
+"Flags"="58"
+
+; Disable Cloud search
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCloudSearch"=dword:00000000
+
+; Disable_Bing_Cortana_In_Search
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
+"DisableSearchBoxSuggestions"=dword:00000001
+
+; Disable Cortana
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCortana"=dword:00000000
+"CortanaConsent"=dword:00000000
+"AllowCortanaAboveLock"=dword:00000000
+"AllowCortanaInAADPathOOBE"=dword:00000000
+
+; Disable Location
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
+"Value"="Deny"
+
+; Customize date and time
+[HKEY_CURRENT_USER\Control Panel\International]
+"iFirstDayOfWeek"="0"
+"iMeasure"="0"
+"sLongDate"="dddd, dd MMMM, yyyy"
+"sShortDate"="dd/MM/yyyy"
+"sShortTime"="HH:mm"
+"sTimeFormat"="HH:mm:ss"
+
+; Set timezone GMT+7
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
+"TimeZoneKeyName"="SE Asia Standard Time"
+
+; Set region is Vietnam
+[HKEY_CURRENT_USER\Control Panel\International\Geo]
+"Name"="VN"
+"Nation"="251"
+
+; Show extension file 
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"HideFileExt"=dword:00000000
+"Hidden"=dword:00000001
+
+; Show seconds on taskbar
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowSecondsInSystemClock"=dword:00000001
+
+; Disable Windows Welcome experience
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+"ScoobeSystemSettingEnabled"=dword:00000000
+
+; Boost show Desktop menu quick
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"="20"
+
+; Disable suggestion ads Start menu & lockscreen
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SystemPaneSuggestionsEnabled"=dword:00000000
+"SubscribedContent-338389Enabled"=dword:00000000
+"SubscribedContent-338388Enabled"=dword:00000000
+"SubscribedContent-338393Enabled"=dword:00000000
+"SubscribedContent-310093Enabled"=dword:00000000
+"SubscribedContent-353694Enabled"=dword:00000000
+"SubscribedContent-353696Enabled"=dword:00000000
+"RotatingLockScreenEnabled"=dword:00000000
+"RotatingLockScreenOverlayEnabled"=dword:00000000
+"SoftLandingEnabled"=dword:00000000
+"SilentInstalledAppsEnabled"=dword:00000000
+
+; Disable personalized id ads
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+; Disable Tailor Experiences
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+
+; Disable Input Experience (20% idle CPU usage in Windows Explorer)
+; https://borncity.com/win/2022/12/08/windows-11-input-experience-consumes-20-cpu-power-in-file-explorer/
+[HKEY_CURRENT_USER\Software\Microsoft\input]
+"IsInputAppPreloadEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh]
+"IsPrelaunchEnabled"=dword:00000000
+
+; Use 100% JPEG quality for wallpapers (default 85%)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"JPEGImportQuality"=dword:00000064
+
+; No auto-restart with logged on users for scheduled automatic updates installations
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"NoAutoRebootWithLoggedOnUsers"=dword:00000001
+
+; Remove "shortcut" text from new shorcuts
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\NamingTemplates]
+"ShortcutNameTemplate"="\"%s.lnk\""
+
+; Send only Required Diagnostic and Usage Data
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+; Set Feedback Frequency to Never
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+"PeriodInNanoSeconds"=-
+
+; Disable "Suggested" app notifications (Ads for MS services)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested]
+"Enabled"=dword:00000000
+
+; Disable recommend for Edge
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"ShowRecommendationsEnabled"=dword:00000000
+
+; Prevent Device Encrytion Bitlocker
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+"PreventDeviceEncryption"=dword:00000001
+
+; Skip limit NET & stop memory leak
+[HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Services/Ndu]
+"Start"=dword:00000004
+
