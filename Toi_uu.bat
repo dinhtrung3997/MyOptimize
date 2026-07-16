@@ -2,12 +2,17 @@
 setlocal
 setlocal enabledelayedexpansion
 
+rem Hack to check if run by Admin [https://stackoverflow.com/a/16285248].
+net session >nul 2>&1 || (echo This script requires Admin.&goto :eof)
+
 echo Adjust some STRING or WORD of registry 
 call:adjustRegistry
 
-
-rem Hack to check if run by Admin [https://stackoverflow.com/a/16285248].
-net session >nul 2>&1 || (echo This script requires Admin.&goto :eof)
+echo.
+echo Set High Performance power plan
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+powercfg -change -monitor-timeout-ac 60
+echo.
 
 rem Yes, this 'HKCU' key needs Admin!
 set "key=HKCU\Software\Policies\Microsoft\Windows\DataCollection"
@@ -79,36 +84,6 @@ bcdedit /set disabledynamictick yes
 bcdedit /deletevalue useplatformclock
 echo.
 
-echo Installing Altsnap
-powershell.exe -Command "winget install --accept-package-agreements -e --id AltSnap.AltSnap"
-rem Configuring... change hotkey to Windows key and run with startup
-IF EXIST "%USERPROFILE%\AppData\Roaming\AltSnap" (
-	robocopy "%~dp0." "%USERPROFILE%\AppData\Roaming\AltSnap" "AltSnap.ini" /E /Z /ZB /IS /R:5 /W:5
-	rem Add to startup
-	reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f /v "AltSnap" /t REG_SZ /d "%USERPROFILE%\AppData\Roaming\AltSnap\AltSnap.exe"
-)
-
-echo.
-echo Installing OpenHashTab
-powershell.exe -Command "winget install --accept-package-agreements -e --id namazso.OpenHashTab"
-echo.
-echo Installing BCUninstaller
-powershell.exe -Command "winget install --accept-package-agreements -h -e --id Klocman.BulkCrapUninstaller"
-
-echo.
-echo Installing 7zip
-powershell.exe -Command "winget install --accept-package-agreements -e --id 7zip.7zip"
-echo.
-echo Installing Java JRE 8
-powershell.exe -Command "winget install --accept-package-agreements -e --id Oracle.JavaRuntimeEnvironment"
-echo.
-echo Installing VLC
-powershell.exe -Command "winget install --accept-package-agreements -e --id VideoLAN.VLC"
-echo.
-
-echo Check Desktop or Laptop then run some command
-call:deskORLap
-
 echo Enabling DirectPlay
 dism.exe /online /enable-feature /featurename:DirectPlay /all
 echo Enabling .NET Framework 3.5...
@@ -133,47 +108,10 @@ echo %OSName% | findstr /I /C:"Windows 11" >nul && (
   echo %OSName% | findstr /I /C:"Windows 10" >nul && (
     echo Applying w10.reg...
     reg import "%~dp0\w10.reg"
+    powershell.exe -Command "(New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | %{ $_.Verbs() } | ? {$_.Name -match 'Un.*pin from Start'} | %{$_.DoIt()}"
     echo Applied!
   ) || (
     echo OS not recognized as Windows 10 or Windows 11.
   )
 )
 goto :eof
-
-rem :deskORLap
-rem Lấy ChassisType và lọc bỏ khoảng trắng/ký tự rác
-rem for /f "tokens=2 delims={}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes /value 2^>nul') do (
-rem    set "raw=%%a"
-rem    set "chassis=!raw:~0!"
-rem )
-
-rem Kiểm tra nếu biến chassis trống (không tìm thấy)
-rem if "%chassis%"=="" (
-rem    echo Khong the xac dinh loai thiet bi, van apply profile Desktop.
-rem    echo Set High Performance power plan
-rem    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-rem    powercfg -change -monitor-timeout-ac 60
-rem    echo.
-rem    echo Installing TwinkleTray
-rem    powershell.exe -Command "winget install --accept-package-agreements -e --id xanderfrangos.twinkletray"
-rem    IF EXIST "%USERPROFILE%\AppData\Local\Programs\twinkle-tray" (
-rem    rem Add to startup
-rem    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f /v "electron.app.Twinkle Tray" /t REG_SZ /d "%USERPROFILE%\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
-rem    goto :end
-rem)
-
-rem Danh sách mã Laptop phổ biến: 8, 9, 10, 11, 12, 14, 18, 21, 30, 31
-rem echo %chassis% | findstr /R "8 9 10 11 12 14 18 21 30 31" >nul
-rem if %errorlevel% != 0 (
-rem    echo [Desktop]
-    echo Set High Performance power plan
-    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-    powercfg -change -monitor-timeout-ac 60
-    echo.
-    echo Installing TwinkleTray
-    powershell.exe -Command "winget install --accept-package-agreements -e --id xanderfrangos.twinkletray"
-rem IF EXIST "%USERPROFILE%\AppData\Local\Programs\twinkle-tray" (
-    rem Add to startup
-    reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f /v "electron.app.Twinkle Tray" /t REG_SZ /d "%USERPROFILE%\AppData\Local\Programs\twinkle-tray\Twinkle Tray.exe"
-rem )
-rem goto :eof

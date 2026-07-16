@@ -72,11 +72,11 @@ Windows Registry Editor Version 5.00
 "sShortTime"="HH:mm"
 "sTimeFormat"="HH:mm:ss"
 
-; Set timezone GMT+7
+Set timezone GMT+7
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
 "TimeZoneKeyName"="SE Asia Standard Time"
 
-; Set region is Vietnam
+Set region is Vietnam
 [HKEY_CURRENT_USER\Control Panel\International\Geo]
 "Name"="VN"
 "Nation"="251"
