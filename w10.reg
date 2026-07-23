@@ -72,11 +72,11 @@ Windows Registry Editor Version 5.00
 "sShortTime"="HH:mm"
 "sTimeFormat"="HH:mm:ss"
 
-Set timezone GMT+7
+; Set timezone GMT+7
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
 "TimeZoneKeyName"="SE Asia Standard Time"
 
-Set region is Vietnam
+; Set region is Vietnam
 [HKEY_CURRENT_USER\Control Panel\International\Geo]
 "Name"="VN"
 "Nation"="251"
@@ -147,7 +147,7 @@ Set region is Vietnam
 ; Set Feedback Frequency to Never
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
 "NumberOfSIUFInPeriod"=dword:00000000
-"PeriodInNanoSeconds"=-
+"PeriodInNanoSeconds"=dword:7fffffff
 
 ; Disable "Suggested" app notifications (Ads for MS services)
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested]
@@ -162,6 +162,9 @@ Set region is Vietnam
 "PreventDeviceEncryption"=dword:00000001
 
 ; Skip limit NET & stop memory leak
-[HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Services/Ndu]
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu]
 "Start"=dword:00000004
 
+; Enable System Restore to create Snapshot
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore]
+"DisableSR"=dword:00000000

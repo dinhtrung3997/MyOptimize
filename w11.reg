@@ -154,7 +154,7 @@ Windows Registry Editor Version 5.00
 ; Set Feedback Frequency to Never
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
 "NumberOfSIUFInPeriod"=dword:00000000
-"PeriodInNanoSeconds"=-
+"PeriodInNanoSeconds"=dword:7fffffff
 
 ; Disable "Suggested" app notifications (Ads for MS services)
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested]
@@ -169,5 +169,9 @@ Windows Registry Editor Version 5.00
 "PreventDeviceEncryption"=dword:00000001
 
 ; Skip limit NET & stop memory leak
-[HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Services/Ndu]
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu]
 "Start"=dword:00000004
+
+; Enable System Restore to create Snapshot
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore]
+"DisableSR"=dword:00000000

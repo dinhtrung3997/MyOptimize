@@ -5,6 +5,15 @@ setlocal enabledelayedexpansion
 rem Hack to check if run by Admin [https://stackoverflow.com/a/16285248].
 net session >nul 2>&1 || (echo This script requires Admin.&goto :eof)
 
+echo.
+echo Create snapshot and backup registry
+rem Set disk space max usage to 5GB first
+vssadmin resize shadowstorage /for=C: /on=C: /maxsize=5GB
+rem Create System Restore Point to make snapshot
+powershell.exe -Command "Checkpoint-Computer -Description 'BeforeOptimize' -RestorePointType 'MODIFY_SETTINGS'"
+rem 
+echo.
+
 echo Adjust some STRING or WORD of registry 
 call:adjustRegistry
 
@@ -27,6 +36,11 @@ reg add "%key%"\DisableTelemetryOptInChangeNotification     /f /v Value /t REG_D
 reg add "%key%"\AllowWUfBCloudProcessing                    /f /v Value /t REG_DWORD /d 0
 reg add "%key%"\AllowUpdateComplianceProcessing             /f /v Value /t REG_DWORD /d 0
 reg add "%key%"\DisableTelemetryOptInSettingsUx             /f /v Value /t REG_DWORD /d 0
+
+echo.
+rem Set disk space max usage to 5GB
+vssadmin resize shadowstorage /for=C: /on=C: /maxsize=5GB
+echo.
 
 echo.
 rem Set timezone to SE Asia Standard Time (GMT+7)

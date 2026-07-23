@@ -1,11 +1,21 @@
 @echo off
 setlocal
-
-echo Adjust some STRING or WORD of registry 
-call:adjustRegistry
+setlocal enabledelayedexpansion
 
 rem Hack to check if run by Admin [https://stackoverflow.com/a/16285248].
 net session >nul 2>&1 || (echo This script requires Admin.&goto :eof)
+
+echo.
+echo Create snapshot and backup registry
+rem Set disk space max usage to 5GB first
+vssadmin resize shadowstorage /for=C: /on=C: /maxsize=5GB
+rem Create System Restore Point to make snapshot
+powershell.exe -Command "Checkpoint-Computer -Description 'BeforeOptimize' -RestorePointType 'MODIFY_SETTINGS'"
+rem 
+echo.
+
+echo Adjust some STRING or WORD of registry 
+call:adjustRegistry
 
 echo.
 rem change something of PowerPlan
