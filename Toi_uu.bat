@@ -88,8 +88,8 @@ echo.
 echo Enabling DirectPlay
 dism.exe /online /enable-feature /featurename:DirectPlay /all
 echo Enabling .NET Framework 3.5 per OS....
-set "sxs=%~dp0\sxs\sxs10"
-if %build% GEQ 22000 set "sxs=%~dp0\sxs\sxs11"
+set "sxs=%~dp0..\sxs\sxs10"
+if %build% GEQ 22000 set "sxs=%~dp0..\sxs\sxs11"
 dism.exe /online /enable-feature /featurename:NetFx3 /all /limitaccess /source:"%sxs%"
 
 echo Done!
