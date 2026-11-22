@@ -57,7 +57,6 @@ schtasks /create /tn "Clear WU Cache" /tr "cmd /c net stop wuauserv & net stop b
 echo.
 echo Optimize (TRIM) SSD disk (C, D drive)
 defrag C: /O
-defrag D: /O
 
 echo.
 echo Turn off BitLocker for C and D and E (if exist)
