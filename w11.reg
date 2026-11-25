@@ -249,3 +249,7 @@ Windows Registry Editor Version 5.00
 "IsMSACloudSearchEnabled"=dword:00000000
 "IsStoreSuggestionsEnabled"=dword:00000000
 "IsWebSuggestionsEnabled"=dword:00000000
+
+; Win+E to show This PC
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"LaunchTo"=dword:00000001
