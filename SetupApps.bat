@@ -102,8 +102,8 @@ rem  5. Java JRE 8 (add Python etc. here if you want)
 rem ============================================================
 call :ChocoInstall jre8 "Java 8"
 
-rem Disable Java auto-update notifications, in both 64-bit and 32-bit registry views
-for %%V in (64 32) do (
+rem Disable Java auto-update notifications, in both 64-bit (or 32-bit) registry views
+for %%V in (64) do (
     reg add "HKLM\SOFTWARE\JavaSoft\Java Update\Policy" /v EnableJavaUpdate /t REG_DWORD /d 0 /f /reg:%%V >nul 2>&1
     reg add "HKLM\SOFTWARE\JavaSoft\Java Update\Policy" /v EnableAutoUpdateCheck /t REG_DWORD /d 0 /f /reg:%%V >nul 2>&1
     reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SunJavaUpdateSched /f /reg:%%V >nul 2>&1
@@ -142,7 +142,7 @@ rem ============================================================
 set "USERDESKTOP="
 for /f "usebackq delims=" %%D in (`powershell -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"`) do set "USERDESKTOP=%%D"
 
-for %%F in ("BCUninstaller.lnk" "VLC media player.lnk") do (
+for %%F in ("BCUninstaller.lnk" "VLC media player.lnk" "Twinkle Tray.lnk") do (
     del /f /q "%PUBLIC%\Desktop\%%~F" >nul 2>&1
     if defined USERDESKTOP del /f /q "%USERDESKTOP%\%%~F" >nul 2>&1
 )
